@@ -26,10 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/alumno') -> controller(AlumnoController::class) -> group(function (){
     Route::get('', 'getAll');
-    Route::middleware('comprobarIDnumerico')->get('{id}', 'getByID');
+    Route::middleware('comprobarIDnumerico')->get('{id}', 'getAlumnoByID');
     Route::post('', 'create');
-    Route::middleware('comprobarIDnumerico')->get('api/alumno/{id}', 'AlumnoController@delete');
-    Route::middleware('comprobarIDnumerico')->get('{id}', 'update');
+    Route::middleware('comprobarIDnumerico')->delete('{id}', 'delete');
+    Route::middleware('comprobarIDnumerico')->post('/update/{id}', 'update');
     Route::middleware('comprobarIDnumerico')->get('{id}/madre', 'getMadre');
     Route::middleware('comprobarIDnumerico')->get('{id}/mascota', 'getMascota');
 });
@@ -39,7 +39,7 @@ Route::prefix('/mascota') -> controller(MascotaController::class) -> group(funct
     Route::middleware('comprobarIDnumerico')->get('{id}', 'getById');
     Route::post('', 'create'); 
     Route::middleware('comprobarIDnumerico')->delete('{id}', 'delete');
-    Route::middleware('comprobarIDnumerico')->put('{id}', 'update');
+    Route::middleware('comprobarIDnumerico')->post('{id}', 'update');
     Route::middleware('comprobarIDnumerico')->get('{id}/alumno', 'getAlumno');
 });
 
@@ -48,7 +48,7 @@ Route::prefix('/madre')->controller(MadreController::class)->group(function () {
     Route::middleware('comprobarIDnumerico')->get('{id}', 'getById');
     Route::post('', 'create');
     Route::middleware('comprobarIDnumerico')->delete('{id}', 'delete');
-    Route::middleware('comprobarIDnumerico')->put('{id}', 'update');
+    Route::middleware('comprobarIDnumerico')->post('{id}', 'update');
     Route::middleware('comprobarIDnumerico')->get('{id}/alumno', 'getAlumno');
 });
 

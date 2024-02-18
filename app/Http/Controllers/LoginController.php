@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -12,10 +14,11 @@ class LoginController extends Controller
 
         $nombre = $request -> input('nombre');
         $password = $request -> input('password');
+        $email = $request -> input('email');
 
-        if($nombre){
+        if($email){
             $datosUsuario = $request -> validate([
-                "nombre" => 'required|max255',
+                "email" => 'required|max:255',
                 "password" => 'required'
             ]);
         }else{
@@ -47,9 +50,11 @@ class LoginController extends Controller
     }
 
     public function cerrarSesion(Request $request){
-        Auth::user() -> tokens -> each(function($token){
+        /*Auth::user() -> tokens -> each(function($token){
             $token -> delete();
-        });
+        });*/
+
+        Auth::user() -> tokens() -> delete();
 
         return response() -> json([
             'success' => true,

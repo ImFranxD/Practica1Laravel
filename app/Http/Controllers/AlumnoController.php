@@ -17,9 +17,11 @@ class AlumnoController extends Controller
         ]);
     }
 
-    public function getByID(Request $request, $id){
+    public function getAlumnoByID(Request $request, $id){
         $alumnos = Alumno::find($id);
         
+        echo $alumnos;
+        exit();
         if (!$alumnos) {
             return response()->json(['error' => 'Alumno no encontrado'], 404);
         }

@@ -15,7 +15,7 @@ class comprobarID
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->id >= 0){
+        if(is_numeric($request->id) && $request->id >= 0){
             return $next($request);
         }else{
             return response('El id proporcionado no es un número válido', 400);
